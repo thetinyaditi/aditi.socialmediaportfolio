@@ -24,6 +24,28 @@ A dark, feminine aesthetic built around a curated palette:
 Navbar · Hero · Stats · About Me · Content Pillars · Portfolio ·
 Brand Collabs · Testimonials · Contact/CTA
 
+## Motion
+
+Built with [Framer Motion](https://www.framer.com/motion/) for a lively,
+playful feel — staggered scroll reveals, floating hero blobs + portrait,
+spring "pop" on pills/buttons, and hover lifts on every card. Honours the
+visitor's "reduce motion" OS setting automatically.
+
+## ✏️ Adding your own content
+
+**You only ever edit one file: [`src/content.js`](src/content.js).**
+
+| Want to add…        | Do this                                                                 |
+| ------------------- | ----------------------------------------------------------------------- |
+| **Photos**          | Drop images in `public/photos/`, then set `photos.hero` / `photos.about`. |
+| **Reels / Posts**   | Copy the Instagram link and paste it into the `posts` or `reels` arrays. They render as **live Instagram embeds**. |
+| **Media kit**       | Put a PDF in `public/`, then set `profile.mediaKit` (e.g. `'/media-kit.pdf'`). |
+| **Brands/reviews**  | Edit the `collabs` and `reviews` arrays.                                |
+
+Until you add real links/photos, the site shows polished gradient
+placeholders, so it always looks complete. After editing, just push to
+GitHub — Vercel rebuilds automatically.
+
 ## Run locally
 
 ```bash

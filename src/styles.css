@@ -294,13 +294,51 @@ img {
   margin: -0.1em 0 0;
 }
 
+.hero__portrait-wrap {
+  margin: 38px auto 30px;
+  width: clamp(180px, 30vw, 268px);
+}
+
 .hero__portrait {
   width: clamp(180px, 30vw, 268px);
+  height: clamp(180px, 30vw, 268px);
   aspect-ratio: 1;
   border-radius: 50%;
-  margin: 38px auto 30px;
+  object-fit: cover;
+  margin: 0 auto;
   border: 6px solid rgba(245, 240, 232, 0.14);
   box-shadow: var(--shadow-card);
+}
+
+/* playful floating blobs behind the hero */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob--1 {
+  width: 320px;
+  height: 320px;
+  top: 8%;
+  left: -60px;
+  background: radial-gradient(circle, var(--gold), transparent 70%);
+}
+
+.blob--2 {
+  width: 360px;
+  height: 360px;
+  bottom: 6%;
+  right: -80px;
+  background: radial-gradient(circle, var(--rose), transparent 70%);
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 1;
 }
 
 .hero__tagline {
@@ -386,6 +424,7 @@ img {
   max-width: 360px;
   aspect-ratio: 1;
   border-radius: 50%;
+  object-fit: cover;
   margin: 0 auto;
   border: 6px solid rgba(245, 240, 232, 0.12);
   box-shadow: var(--shadow-card);
@@ -517,6 +556,53 @@ img {
   z-index: 4;
 }
 
+/* Live Instagram embed layouts */
+.embed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 28px);
+  margin-top: 16px;
+  justify-items: center;
+}
+
+.embed-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 28px);
+  margin-top: clamp(28px, 5vw, 48px);
+  justify-items: center;
+}
+
+.embed-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.embed-item .instagram-media {
+  margin: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 480px !important;
+  border-radius: 18px !important;
+}
+
+.embed-item--reel .instagram-media {
+  max-width: 360px !important;
+}
+
+@media (max-width: 860px) {
+  .embed-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .embed-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===========================================================
    BRAND COLLABS
    =========================================================== */
@@ -545,10 +631,17 @@ img {
   border-radius: var(--radius-sm);
   display: grid;
   place-items: center;
+  overflow: hidden;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.7rem;
   color: var(--cream);
+}
+
+.collab__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .collab__name {
@@ -718,6 +811,23 @@ img {
     cursor: pointer;
     font-size: 1rem;
     line-height: 1;
+    justify-self: end;
+  }
+  .nav__drawer {
+    list-style: none;
+    margin: 0;
+    padding: 8px 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(227, 201, 168, 0.18);
+  }
+  .nav__drawer a {
+    color: var(--cream);
+    opacity: 0.9;
   }
   .nav__brand {
     text-align: left;

@@ -1,11 +1,32 @@
 import { useState } from 'react'
+import { motion, MotionConfig } from 'framer-motion'
+import InstagramEmbed from './InstagramEmbed.jsx'
+import {
+  profile,
+  photos,
+  stats,
+  pillars,
+  posts,
+  reels,
+  collabs,
+  reviews,
+  postPlaceholders,
+  reelPlaceholders,
+} from './content.js'
+import { fadeUp, fadeDown, scaleIn, popIn, container, viewport } from './motion.js'
 
-/* -----------------------------------------------------------
-   Wavy SVG divider.
-   `fill` is the colour of the section the wave belongs to so it
-   bleeds smoothly into the adjacent section.
-   position: 'top' | 'bottom'
------------------------------------------------------------ */
+const BURGUNDY = '#6b1f2a'
+const CREAM = '#f5f0e8'
+
+const NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Stats', href: '#stats' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Collabs', href: '#collabs' },
+  { label: 'Contact', href: '#contact' },
+]
+
+/* Wavy SVG divider — `fill` is the colour of the owning section. */
 function Wave({ position, fill }) {
   return (
     <div className={`wave wave--${position}`} aria-hidden="true">
@@ -26,81 +47,55 @@ function Wave({ position, fill }) {
   )
 }
 
-const BURGUNDY = '#6b1f2a'
-const CREAM = '#f5f0e8'
+/* Reusable scroll-reveal wrapper. */
+function Reveal({ children, variants = fadeUp, className, style, ...rest }) {
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      variants={variants}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+      {...rest}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
-const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Stats', href: '#stats' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Collabs', href: '#collabs' },
-  { label: 'Contact', href: '#contact' },
-]
-
-const STATS = [
-  { num: '70K+', label: 'Account Reach' },
-  { num: '12%', label: 'Engagement Rate' },
-  { num: '17–29', label: 'Core Audience Age' },
-  { num: '2+', label: 'Brand Collabs' },
-]
-
-const PILLARS = [
-  'Quotes for Women',
-  'Student Life',
-  'Berlin Lifestyle',
-  'Girls Who Get Things Done',
-]
-
-const WORK_CARDS = [
-  { label: 'Post', from: '#7e2c38', to: '#b6707a' },
-  { label: 'Post', from: '#8a3a3f', to: '#e3c9a8' },
-  { label: 'Reel', from: '#5b1a24', to: '#c89b6a' },
-  { label: 'Post', from: '#7e2c38', to: '#d8a9a0' },
-]
-
-const PHONES = [
-  { label: 'Reel', from: '#7e2c38', to: '#e3c9a8' },
-  { label: 'Video', from: '#561620', to: '#b6707a' },
-  { label: 'Reel', from: '#8a3a3f', to: '#c89b6a' },
-]
-
-const COLLABS = [
-  {
-    short: 'IK',
-    name: 'Ikono Berlin',
-    desc: 'Reels featured on their official page.',
-    from: '#6b1f2a',
-    to: '#b6707a',
-  },
-  {
-    short: 'TG',
-    name: 'The Greens Berlin',
-    desc: 'Gifted content collaboration.',
-    from: '#3f5b2f',
-    to: '#9bb06a',
-  },
-]
-
-const REVIEWS = [
-  {
-    quote:
-      'Aditi delivered scroll-stopping reels that felt completely on-brand. Her content brought a warm, authentic energy our page had been missing.',
-    brand: 'Ikono Berlin',
-  },
-  {
-    quote:
-      'Working with Aditi was effortless — thoughtful, reliable, and genuinely creative. The gifted collaboration exceeded everything we hoped for.',
-    brand: 'The Greens Berlin',
-  },
-]
+/* Section heading block (eyebrow + script title) with stagger. */
+function Heading({ eyebrow, title, center }) {
+  return (
+    <motion.div
+      className={center ? 'center' : undefined}
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
+      <motion.p className="eyebrow" variants={fadeUp}>
+        {eyebrow}
+      </motion.p>
+      <motion.h2 className="script" variants={fadeUp}>
+        {title}
+      </motion.h2>
+    </motion.div>
+  )
+}
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       {/* ============================= NAVBAR ============================= */}
-      <nav className="nav">
+      <motion.nav
+        className="nav"
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className="nav__inner">
           <ul className="nav__links">
             {NAV_LINKS.map((l) => (
@@ -110,7 +105,7 @@ export default function App() {
             ))}
           </ul>
           <a href="#hero" className="nav__brand">
-            thetinyaditi
+            {profile.handle}
           </a>
           <div className="nav__right">
             <a href="#contact" className="nav__cta">
@@ -126,26 +121,67 @@ export default function App() {
             ☰
           </button>
         </div>
-      </nav>
+        {menuOpen && (
+          <ul className="nav__drawer">
+            {NAV_LINKS.map((l) => (
+              <li key={l.label}>
+                <a href={l.href} onClick={() => setMenuOpen(false)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </motion.nav>
 
       {/* ============================== HERO ============================== */}
       <header id="hero" className="section section--burgundy hero">
-        <div className="wrap">
-          <p className="eyebrow">Berlin · Lifestyle Creator</p>
-          <h1 className="hero__headline">LIFESTYLE &amp; CONTENT</h1>
-          <p className="hero__script">by Aditi</p>
+        {/* playful floating background blobs */}
+        <motion.span
+          className="blob blob--1"
+          animate={{ y: [0, -26, 0], x: [0, 12, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.span
+          className="blob blob--2"
+          animate={{ y: [0, 22, 0], x: [0, -14, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
-          <div className="hero__roles">
+        <motion.div
+          className="wrap"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.p className="eyebrow" variants={fadeUp}>
+            Berlin · Lifestyle Creator
+          </motion.p>
+          <motion.h1 className="hero__headline" variants={fadeUp}>
+            LIFESTYLE &amp; CONTENT
+          </motion.h1>
+          <motion.p className="hero__script" variants={fadeUp}>
+            by {profile.name}
+          </motion.p>
+
+          <motion.div className="hero__roles" variants={fadeUp}>
             <span className="tag">Content Creator</span>
             <span className="tag">UGC Creator</span>
-          </div>
+          </motion.div>
 
-          <div className="hero__portrait ph" role="img" aria-label="Portrait of Aditi" />
+          <motion.div className="hero__portrait-wrap" variants={popIn}>
+            <motion.div
+              animate={{ y: [0, -16, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Portrait src={photos.hero} className="hero__portrait" alt="Aditi" />
+            </motion.div>
+          </motion.div>
 
-          <p className="hero__tagline">
+          <motion.p className="hero__tagline" variants={fadeUp}>
             Creating authentic content for ambitious women in Berlin.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         <Wave position="bottom" fill={CREAM} />
       </header>
 
@@ -153,16 +189,26 @@ export default function App() {
       <section id="stats" className="section section--cream">
         <Wave position="top" fill={BURGUNDY} />
         <div className="wrap center">
-          <p className="eyebrow">By the numbers</p>
-          <h2 className="script">The Stats</h2>
-          <div className="stats__grid">
-            {STATS.map((s) => (
-              <div className="stat" key={s.label}>
+          <Heading eyebrow="By the numbers" title="The Stats" center />
+          <motion.div
+            className="stats__grid"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            {stats.map((s) => (
+              <motion.div
+                className="stat"
+                key={s.label}
+                variants={scaleIn}
+                whileHover={{ y: -8, scale: 1.03 }}
+              >
                 <div className="stat__num">{s.num}</div>
                 <div className="stat__label">{s.label}</div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
         <Wave position="bottom" fill={BURGUNDY} />
       </section>
@@ -171,24 +217,21 @@ export default function App() {
       <section id="about" className="section section--burgundy">
         <Wave position="top" fill={CREAM} />
         <div className="wrap">
-          <p className="eyebrow center">Hello there</p>
-          <h2 className="script center">About Me</h2>
+          <Heading eyebrow="Hello there" title="About Me" center />
           <div className="about__grid">
-            <div
-              className="about__portrait ph"
-              role="img"
-              aria-label="Portrait of Aditi"
-            />
-            <div className="about__text">
+            <Reveal variants={scaleIn}>
+              <Portrait src={photos.about} className="about__portrait" alt="Aditi" />
+            </Reveal>
+            <Reveal className="about__text" variants={fadeUp}>
               <p>
                 I'm Aditi, an MBA student and Berlin-based content creator at{' '}
-                <span className="handle">@thetinyaditi</span>. I create short-form
-                video and lifestyle content for ambitious young women — covering
-                student life, self-growth, and real everyday moments. My audience is
-                70K+ strong, predominantly women aged 17–29 who are building
-                something.
+                <span className="handle">@{profile.handle}</span>. I create
+                short-form video and lifestyle content for ambitious young women —
+                covering student life, self-growth, and real everyday moments. My
+                audience is 70K+ strong, predominantly women aged 17–29 who are
+                building something.
               </p>
-            </div>
+            </Reveal>
           </div>
         </div>
         <Wave position="bottom" fill={CREAM} />
@@ -198,15 +241,25 @@ export default function App() {
       <section className="section section--cream">
         <Wave position="top" fill={BURGUNDY} />
         <div className="wrap center">
-          <p className="eyebrow">Content pillars</p>
-          <h2 className="script">What I Create</h2>
-          <div className="pillars">
-            {PILLARS.map((p) => (
-              <span className="pillar" key={p}>
+          <Heading eyebrow="Content pillars" title="What I Create" center />
+          <motion.div
+            className="pillars"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            {pillars.map((p) => (
+              <motion.span
+                className="pillar"
+                key={p}
+                variants={popIn}
+                whileHover={{ scale: 1.08, y: -4 }}
+              >
                 {p}
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
         </div>
         <Wave position="bottom" fill={BURGUNDY} />
       </section>
@@ -215,38 +268,86 @@ export default function App() {
       <section id="portfolio" className="section section--burgundy">
         <Wave position="top" fill={CREAM} />
         <div className="wrap">
-          <p className="eyebrow center">Selected work</p>
-          <h2 className="script center">My Work</h2>
+          <Heading eyebrow="Selected work" title="My Work" center />
 
-          <div className="work__grid">
-            {WORK_CARDS.map((c, i) => (
-              <div
-                key={i}
-                className="work__card ph"
-                style={{
-                  background: `linear-gradient(150deg, ${c.from}, ${c.to})`,
-                }}
-              >
-                <span className="work__label">{c.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="phones">
-            {PHONES.map((p, i) => (
-              <div className="phone" key={i}>
-                <div className="phone__notch" />
-                <div
-                  className="phone__screen ph"
-                  style={{
-                    background: `linear-gradient(165deg, ${p.from}, ${p.to})`,
-                  }}
+          {/* POSTS — live Instagram embeds, or placeholders until added */}
+          {posts.length > 0 ? (
+            <motion.div
+              className="embed-grid"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
+              {posts.map((url) => (
+                <motion.div className="embed-item" key={url} variants={scaleIn}>
+                  <InstagramEmbed url={url} />
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              className="work__grid"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
+              {postPlaceholders.map((c, i) => (
+                <motion.div
+                  key={i}
+                  className="work__card ph"
+                  style={{ background: `linear-gradient(150deg, ${c.from}, ${c.to})` }}
+                  variants={scaleIn}
+                  whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <span className="phone__label">{p.label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+                  <span className="work__label">{c.label}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* REELS — live Instagram embeds, or phone placeholders */}
+          {reels.length > 0 ? (
+            <motion.div
+              className="embed-row"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
+              {reels.map((url) => (
+                <motion.div className="embed-item embed-item--reel" key={url} variants={scaleIn}>
+                  <InstagramEmbed url={url} />
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              className="phones"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
+              {reelPlaceholders.map((p, i) => (
+                <motion.div
+                  className="phone"
+                  key={i}
+                  variants={scaleIn}
+                  whileHover={{ y: -10, scale: 1.03 }}
+                >
+                  <div className="phone__notch" />
+                  <div
+                    className="phone__screen ph"
+                    style={{ background: `linear-gradient(165deg, ${p.from}, ${p.to})` }}
+                  >
+                    <span className="phone__label">{p.label}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
         <Wave position="bottom" fill={CREAM} />
       </section>
@@ -255,26 +356,34 @@ export default function App() {
       <section id="collabs" className="section section--cream">
         <Wave position="top" fill={BURGUNDY} />
         <div className="wrap center">
-          <p className="eyebrow">Partnerships</p>
-          <h2 className="script">Brands I've Worked With</h2>
-          <div className="collabs__grid">
-            {COLLABS.map((c) => (
-              <div className="collab" key={c.name}>
+          <Heading eyebrow="Partnerships" title="Brands I've Worked With" center />
+          <motion.div
+            className="collabs__grid"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            {collabs.map((c) => (
+              <motion.div
+                className="collab"
+                key={c.name}
+                variants={fadeUp}
+                whileHover={{ y: -6 }}
+              >
                 <div
                   className="collab__logo"
-                  style={{
-                    background: `linear-gradient(150deg, ${c.from}, ${c.to})`,
-                  }}
+                  style={{ background: `linear-gradient(150deg, ${c.from}, ${c.to})` }}
                 >
-                  {c.short}
+                  {c.logo ? <img src={c.logo} alt={c.name} /> : c.short}
                 </div>
                 <div style={{ textAlign: 'left' }}>
                   <h3 className="collab__name">{c.name}</h3>
                   <p className="collab__desc">{c.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
         <Wave position="bottom" fill={BURGUNDY} />
       </section>
@@ -283,19 +392,29 @@ export default function App() {
       <section className="section section--burgundy">
         <Wave position="top" fill={CREAM} />
         <div className="wrap center">
-          <p className="eyebrow">Kind words</p>
-          <h2 className="script">What They Say</h2>
-          <div className="reviews">
-            {REVIEWS.map((r) => (
-              <div className="review" key={r.brand}>
+          <Heading eyebrow="Kind words" title="What They Say" center />
+          <motion.div
+            className="reviews"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            {reviews.map((r) => (
+              <motion.div
+                className="review"
+                key={r.brand}
+                variants={scaleIn}
+                whileHover={{ y: -6 }}
+              >
                 <div className="review__stars" aria-label="5 out of 5 stars">
                   ★★★★★
                 </div>
                 <p className="review__quote">“{r.quote}”</p>
                 <div className="review__brand">{r.brand}</div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
         <Wave position="bottom" fill={CREAM} />
       </section>
@@ -303,36 +422,55 @@ export default function App() {
       {/* ============================== CONTACT =========================== */}
       <section id="contact" className="section section--cream">
         <Wave position="top" fill={BURGUNDY} />
-        <div className="wrap contact">
-          <p className="eyebrow">Let's collaborate</p>
-          <h2 className="script">Work With Me</h2>
-          <div className="contact__lines">
+        <motion.div
+          className="wrap contact"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
+          <motion.p className="eyebrow" variants={fadeUp}>
+            Let's collaborate
+          </motion.p>
+          <motion.h2 className="script" variants={fadeUp}>
+            Work With Me
+          </motion.h2>
+          <motion.div className="contact__lines" variants={fadeUp}>
             <span>
-              <a href="mailto:aditisingh.collabs@gmail.com">
-                aditisingh.collabs@gmail.com
-              </a>
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
             </span>
             <span>
-              <a
-                href="https://instagram.com/thetinyaditi"
-                target="_blank"
-                rel="noreferrer"
-              >
-                @thetinyaditi
+              <a href={profile.instagram} target="_blank" rel="noreferrer">
+                @{profile.handle}
               </a>
             </span>
-          </div>
-          <a href="#" className="btn">
+          </motion.div>
+          <motion.a
+            href={profile.mediaKit || '#'}
+            className="btn"
+            {...(profile.mediaKit ? { download: true } : {})}
+            variants={popIn}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+          >
             Download Media Kit
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </section>
 
       {/* ============================== FOOTER ============================ */}
       <footer className="footer">
-        © {new Date().getFullYear()} <span>thetinyaditi</span> · Lifestyle &amp;
+        © {new Date().getFullYear()} <span>{profile.handle}</span> · Lifestyle &amp;
         Content · Berlin
       </footer>
-    </>
+    </MotionConfig>
   )
+}
+
+/* Circular/rounded portrait: real photo if provided, else gradient. */
+function Portrait({ src, className, alt }) {
+  if (src) {
+    return <img src={src} className={className} alt={alt} />
+  }
+  return <div className={`${className} ph`} role="img" aria-label={alt} />
 }
