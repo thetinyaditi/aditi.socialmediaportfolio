@@ -30,8 +30,8 @@ export const profile = {
 
 // Portrait photos. Leave '' to show the gradient placeholder.
 export const photos = {
-  hero: '', // e.g. '/photos/hero.jpg'
-  about: '', // e.g. '/photos/about.jpg'
+  hero: '/photos/hero.jpg',
+  about: '/photos/about.png',
 }
 
 export const stats = [
@@ -98,15 +98,16 @@ export const reviews = [
   },
 ]
 
-// Fallback placeholder gradients (used only until you add real media).
+// Placeholder cards shown until you add Instagram links above.
+// `img` shows a real photo; otherwise a gradient fills the card.
 export const postPlaceholders = [
-  { label: 'Post', from: '#7e2c38', to: '#b6707a' },
+  { label: 'Post', img: '/photos/post-1.jpg' },
   { label: 'Post', from: '#8a3a3f', to: '#e3c9a8' },
   { label: 'Reel', from: '#5b1a24', to: '#c89b6a' },
   { label: 'Post', from: '#7e2c38', to: '#d8a9a0' },
 ]
 export const reelPlaceholders = [
-  { label: 'Reel', from: '#7e2c38', to: '#e3c9a8' },
+  { label: 'Reel', img: '/photos/reel-1.jpg' },
+  { label: 'Reel', img: '/photos/reel-2.jpg' },
   { label: 'Video', from: '#561620', to: '#b6707a' },
-  { label: 'Reel', from: '#8a3a3f', to: '#c89b6a' },
 ]

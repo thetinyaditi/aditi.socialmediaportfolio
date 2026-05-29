@@ -296,11 +296,16 @@ export default function App() {
               {postPlaceholders.map((c, i) => (
                 <motion.div
                   key={i}
-                  className="work__card ph"
-                  style={{ background: `linear-gradient(150deg, ${c.from}, ${c.to})` }}
+                  className={`work__card${c.img ? '' : ' ph'}`}
+                  style={
+                    c.img
+                      ? undefined
+                      : { background: `linear-gradient(150deg, ${c.from}, ${c.to})` }
+                  }
                   variants={scaleIn}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
+                  {c.img && <img className="card__img" src={c.img} alt={c.label} />}
                   <span className="work__label">{c.label}</span>
                 </motion.div>
               ))}
@@ -339,9 +344,14 @@ export default function App() {
                 >
                   <div className="phone__notch" />
                   <div
-                    className="phone__screen ph"
-                    style={{ background: `linear-gradient(165deg, ${p.from}, ${p.to})` }}
+                    className={`phone__screen${p.img ? '' : ' ph'}`}
+                    style={
+                      p.img
+                        ? undefined
+                        : { background: `linear-gradient(165deg, ${p.from}, ${p.to})` }
+                    }
                   >
+                    {p.img && <img className="card__img" src={p.img} alt={p.label} />}
                     <span className="phone__label">{p.label}</span>
                   </div>
                 </motion.div>
