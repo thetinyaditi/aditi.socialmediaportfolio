@@ -25,7 +25,7 @@ export const profile = {
   email: 'aditisingh.collabs@gmail.com',
   instagram: 'https://instagram.com/thetinyaditi',
   // Leave '' to keep the button as a placeholder.
-  mediaKit: '',
+  mediaKit: '/media-kit.pdf',
 }
 
 // Portrait photos. Leave '' to show the gradient placeholder.
@@ -52,18 +52,18 @@ export const pillars = [
 // Paste post links here. Each one renders as a live embed.
 // While empty, polished placeholder cards are shown instead.
 export const posts = [
-  // 'https://www.instagram.com/p/DGks-4OicJB/?img_index=1',
-  // 'https://www.instagram.com/p/DQ2xuJcDI0F/?img_index=1',
-  // 'https://www.instagram.com/p/DNPUhSNtQ69/?img_index=1',
+  'https://www.instagram.com/p/DGks-4OicJB/',
+  'https://www.instagram.com/p/DQ2xuJcDI0F/',
+  'https://www.instagram.com/p/DNPUhSNtQ69/',
+  'https://www.instagram.com/p/DY6uNJssz2y/',
 ]
 
 // ---- INSTAGRAM REELS / VIDEOS (vertical) ----
 // Paste reel links here. While empty, phone-frame placeholders show.
 export const reels = [
-// 'https://www.instagram.com/p/DY6uNJssz2y/',
-  // 'https://www.instagram.com/reel/DUlfjVmDGpc/',
-  // 'https://www.instagram.com/reel/DRx3vengvF2/',
-  // 'https://www.instagram.com/reel/CbowTqFgOcN/',
+  'https://www.instagram.com/reel/DUlfjVmDGpc/',
+  'https://www.instagram.com/reel/DRx3vengvF2/',
+  'https://www.instagram.com/reel/CbowTqFgOcN/',
 ]
 
 export const collabs = [
