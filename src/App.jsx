@@ -7,12 +7,10 @@ import {
   stats,
   pillars,
   posts,
-  reels,
   videos,
   collabs,
   reviews,
   postPlaceholders,
-  reelPlaceholders,
 } from './content.js'
 import { fadeUp, fadeDown, scaleIn, popIn, container, viewport } from './motion.js'
 
@@ -308,53 +306,6 @@ export default function App() {
                 >
                   {c.img && <img className="card__img" src={c.img} alt={c.label} />}
                   <span className="work__label">{c.label}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-
-          {/* REELS — live Instagram embeds, or phone placeholders */}
-          {reels.length > 0 ? (
-            <motion.div
-              className="embed-row"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewport}
-            >
-              {reels.map((url) => (
-                <motion.div className="embed-item embed-item--reel" key={url} variants={scaleIn}>
-                  <InstagramEmbed url={url} />
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              className="phones"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewport}
-            >
-              {reelPlaceholders.map((p, i) => (
-                <motion.div
-                  className="phone"
-                  key={i}
-                  variants={scaleIn}
-                  whileHover={{ y: -10, scale: 1.03 }}
-                >
-                  <div className="phone__notch" />
-                  <div
-                    className={`phone__screen${p.img ? '' : ' ph'}`}
-                    style={
-                      p.img
-                        ? undefined
-                        : { background: `linear-gradient(165deg, ${p.from}, ${p.to})` }
-                    }
-                  >
-                    {p.img && <img className="card__img" src={p.img} alt={p.label} />}
-                    <span className="phone__label">{p.label}</span>
-                  </div>
                 </motion.div>
               ))}
             </motion.div>

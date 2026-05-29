@@ -58,14 +58,6 @@ export const posts = [
   'https://www.instagram.com/p/DY6uNJssz2y/',
 ]
 
-// ---- INSTAGRAM REELS / VIDEOS (vertical) ----
-// Paste reel links here. While empty, phone-frame placeholders show.
-export const reels = [
-  'https://www.instagram.com/reel/DUlfjVmDGpc/',
-  'https://www.instagram.com/reel/DRx3vengvF2/',
-  'https://www.instagram.com/reel/CbowTqFgOcN/',
-]
-
 // ---- SELF-HOSTED VIDEO REELS (your uploaded .mp4 files) ----
 // These play directly on the page (muted, autoplay, looped) and always
 // work — no dependency on Instagram. Drop files in public/videos/.
@@ -114,9 +106,4 @@ export const postPlaceholders = [
   { label: 'Post', from: '#8a3a3f', to: '#e3c9a8' },
   { label: 'Reel', from: '#5b1a24', to: '#c89b6a' },
   { label: 'Post', from: '#7e2c38', to: '#d8a9a0' },
-]
-export const reelPlaceholders = [
-  { label: 'Reel', img: '/photos/reel-1.jpg' },
-  { label: 'Reel', img: '/photos/reel-2.jpg' },
-  { label: 'Video', from: '#561620', to: '#b6707a' },
 ]
