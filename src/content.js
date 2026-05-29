@@ -72,6 +72,7 @@ export const reels = [
 export const videos = [
   '/videos/video-1.mp4',
   '/videos/video-2.mp4',
+  '/videos/video-3.mp4',
 ]
 
 export const collabs = [

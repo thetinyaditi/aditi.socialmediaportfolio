@@ -578,50 +578,59 @@ img {
   z-index: 4;
 }
 
-/* Live Instagram embed layouts */
+/* Live Instagram embed layouts.
+   Instagram iframes have a fixed natural width (~326px) and varying
+   heights. We pin every tile to that exact width and center the grid,
+   so all posts line up uniformly instead of rendering ragged. */
 .embed-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 28px);
+  grid-template-columns: repeat(2, 326px);
+  justify-content: center;
+  align-items: start;
+  gap: clamp(20px, 3vw, 32px);
   margin-top: 16px;
-  justify-items: center;
 }
 
 .embed-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 28px);
+  grid-template-columns: repeat(3, 326px);
+  justify-content: center;
+  align-items: start;
+  gap: clamp(20px, 3vw, 32px);
   margin-top: clamp(28px, 5vw, 48px);
-  justify-items: center;
 }
 
 .embed-item {
-  width: 100%;
+  width: 326px;
   display: flex;
   justify-content: center;
 }
 
 .embed-item .instagram-media {
   margin: 0 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 480px !important;
+  width: 326px !important;
+  min-width: 326px !important;
+  max-width: 326px !important;
   border-radius: 18px !important;
 }
 
-.embed-item--reel .instagram-media {
-  max-width: 360px !important;
-}
-
-@media (max-width: 860px) {
+@media (max-width: 720px) {
+  .embed-grid,
   .embed-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 326px;
   }
 }
 
-@media (max-width: 720px) {
-  .embed-grid {
+@media (max-width: 360px) {
+  .embed-grid,
+  .embed-row {
     grid-template-columns: 1fr;
+  }
+  .embed-item,
+  .embed-item .instagram-media {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
   }
 }
 
