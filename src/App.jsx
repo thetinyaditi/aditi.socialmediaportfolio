@@ -8,6 +8,7 @@ import {
   pillars,
   posts,
   reels,
+  videos,
   collabs,
   reviews,
   postPlaceholders,
@@ -353,6 +354,40 @@ export default function App() {
                   >
                     {p.img && <img className="card__img" src={p.img} alt={p.label} />}
                     <span className="phone__label">{p.label}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* SELF-HOSTED VIDEO REELS — your uploaded .mp4 files */}
+          {videos.length > 0 && (
+            <motion.div
+              className="phones"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
+              {videos.map((src) => (
+                <motion.div
+                  className="phone"
+                  key={src}
+                  variants={scaleIn}
+                  whileHover={{ y: -10, scale: 1.03 }}
+                >
+                  <div className="phone__notch" />
+                  <div className="phone__screen">
+                    <video
+                      className="card__img"
+                      src={src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                    <span className="phone__label">Reel</span>
                   </div>
                 </motion.div>
               ))}

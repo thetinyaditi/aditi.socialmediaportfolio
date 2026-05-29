@@ -66,6 +66,14 @@ export const reels = [
   'https://www.instagram.com/reel/CbowTqFgOcN/',
 ]
 
+// ---- SELF-HOSTED VIDEO REELS (your uploaded .mp4 files) ----
+// These play directly on the page (muted, autoplay, looped) and always
+// work — no dependency on Instagram. Drop files in public/videos/.
+export const videos = [
+  '/videos/video-1.mp4',
+  '/videos/video-2.mp4',
+]
+
 export const collabs = [
   {
     short: 'IK',
