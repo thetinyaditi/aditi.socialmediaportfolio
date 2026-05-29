@@ -55,7 +55,7 @@ export const posts = [
   'https://www.instagram.com/p/DGks-4OicJB/',
   'https://www.instagram.com/p/DYCuODIDGvx/',
   'https://www.instagram.com/p/DNPUhSNtQ69/',
-  'https://www.instagram.com/p/DY6uNJssz2y/',
+  'https://www.instagram.com/p/DGckusGiikR/',
 ]
 
 // ---- SELF-HOSTED VIDEO REELS (your uploaded .mp4 files) ----
