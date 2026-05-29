@@ -53,7 +53,7 @@ export const pillars = [
 // While empty, polished placeholder cards are shown instead.
 export const posts = [
   'https://www.instagram.com/p/DGks-4OicJB/',
-  'https://www.instagram.com/p/DQ2xuJcDI0F/',
+  'https://www.instagram.com/p/DYCuODIDGvx/',
   'https://www.instagram.com/p/DNPUhSNtQ69/',
   'https://www.instagram.com/p/DY6uNJssz2y/',
 ]
