@@ -602,6 +602,10 @@ img {
 
 .embed-item {
   width: 326px;
+  height: 470px;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
   display: flex;
   justify-content: center;
 }
@@ -611,7 +615,9 @@ img {
   width: 326px !important;
   min-width: 326px !important;
   max-width: 326px !important;
+  border: 0 !important;
   border-radius: 18px !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 720px) {
