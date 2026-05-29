@@ -52,18 +52,18 @@ export const pillars = [
 // Paste post links here. Each one renders as a live embed.
 // While empty, polished placeholder cards are shown instead.
 export const posts = [
-  // 'https://www.instagram.com/p/XXXXXXXXXXX/',
-  // 'https://www.instagram.com/p/YYYYYYYYYYY/',
-  // 'https://www.instagram.com/p/ZZZZZZZZZZZ/',
-  // 'https://www.instagram.com/p/WWWWWWWWWWW/',
+  // 'https://www.instagram.com/p/DGks-4OicJB/?img_index=1',
+  // 'https://www.instagram.com/p/DQ2xuJcDI0F/?img_index=1',
+  // 'https://www.instagram.com/p/DNPUhSNtQ69/?img_index=1',
 ]
 
 // ---- INSTAGRAM REELS / VIDEOS (vertical) ----
 // Paste reel links here. While empty, phone-frame placeholders show.
 export const reels = [
-  // 'https://www.instagram.com/reel/XXXXXXXXXXX/',
-  // 'https://www.instagram.com/reel/YYYYYYYYYYY/',
-  // 'https://www.instagram.com/reel/ZZZZZZZZZZZ/',
+// 'https://www.instagram.com/p/DY6uNJssz2y/',
+  // 'https://www.instagram.com/reel/DUlfjVmDGpc/',
+  // 'https://www.instagram.com/reel/DRx3vengvF2/',
+  // 'https://www.instagram.com/reel/CbowTqFgOcN/',
 ]
 
 export const collabs = [
